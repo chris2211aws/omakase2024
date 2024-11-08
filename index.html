@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NLB Learning Omakase</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap">
+  <script>
+        async function fetchSearchVal() {
+            const url = 'https://www.onemap.gov.sg/api/common/elastic/search?searchVal=644658&returnGeom=Y&getAddrDetails=Y&pageNum=1';
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+				//alert(JSON.stringify(data.results[0].SEARCHVAL))
+                const searchVal = data?.results[0]?.SEARCHVAL || 'No results found';
+                document.getElementById('result').innerText = 'Address Result: ' + searchVal;
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                document.getElementById('result').innerText = 'Error fetching data';
+            }
+        }
+		
+		async function postSentiment() {
+            const url = 'http://localhost:8080/sentiment/';
+            const textInput = document.getElementById('textInput').value;
+            const data = { text: textInput };
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const jsonResponse = await response.json();
+				const theScore = JSON.stringify(jsonResponse.score, null, 2);
+				//alert(theScore)
+                document.getElementById('result2').innerText = 'Sentiment score: ' + theScore;
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('result2').innerText = 'Error fetching data';
+            }
+        }
+    </script>
+</head>
+<body>
+	<header>
+        <h1>LEARNING OMAKASE</h1>
+    </header>
+    <main>
+	
+		<!--Step 1: Intro-->
+        <div id="step1" class="step">
+			<img src="Images/chef.png" alt="Chef NLB" class="chef-image">
+			<p>Hi, this is Chef NLB, and I will be <br>preparing some tasty treats for you.</p>
+			<p>I hope you are as excited as me! <br>But first, I will like to know a bit about you.</p>
+			<br>
+			<button id="startButton" class="grey-button">Let's start!</button>
+			<br>
+			<!--<button onclick="fetchSearchVal()">Demo API Call: https://www.onemap.gov.sg/api/common/elastic/search?searchVal=644658&returnGeom=Y&getAddrDetails=Y&pageNum=1</button>
+			<p id="result"></p>-->
+			
+			<input type="text" id="textInput" placeholder="Write statement for sentiment check">
+			<button onclick="postSentiment()">Sentiment API Call: http://localhost:8080/sentiment</button>
+			<pre id="result2"></pre>
+		</div>
+		
+		<!--Step 2: Select Topic-->
+        <div id="step2" class="step hidden">
+            <img src="Images/sushi_1.png" alt="Sushi" class="sushi-image">
+            <div class="progress-bar">
+                <div class="progress_1"></div>
+            </div>
+            <div class="question-box">
+                <p>What topic are you interested<br> to learn more of?</p>
+            </div>
+            <div class="options">
+                <button class="option-button">History</button>
+                <button class="option-button">Science</button>
+                <button class="option-button">Technology</button>
+                <button class="option-button">Self-help</button>
+				<button class="option-button">Genre A</button>
+				<button class="option-button">Genre B</button>
+				<button class="option-button">Genre C</button>
+				<button class="option-button">Genre D</button>
+            </div>
+			
+        </div>
+		
+		<!--Step 3: Select Specific Topic-->
+		<div id="step3" class="step hidden">
+			<img src="Images/sushi_2.png" alt="Sushi" class="sushi-image">
+			<div class="progress-bar">
+				<div class="progress_2"></div>
+			</div>
+			<div class="question-box">
+				<p id="specific-question"></p>
+			</div>
+			<div id="specific-options" class="options">
+				<!-- Options will be dynamically added here -->
+			</div>
+		</div>
+		
+		<!--Step 4: Select Expertise-->
+        <div id="step4" class="step hidden">
+            <img src="Images/sushi_3.png" alt="Sushi" class="sushi-image">
+            <div class="progress-bar">
+                <div class="progress_3"></div>
+            </div>
+            <div class="question-box">
+                <p>How familiar are you with<br> this selected topic?</p>
+            </div>
+            <div class="options">
+                <button class="option-button">Beginner</button>
+                <button class="option-button">Intermediate</button>
+                <button class="option-button">Advanced</button>
+            </div>
+			
+        </div>		
+		
+		<!--Step 5: Select Expertise-->
+        <div id="step5" class="step hidden">
+            <img src="Images/sushi_4.png" alt="Sushi" class="sushi-image">
+            <div class="progress-bar">
+                <div class="progress_4"></div>
+            </div>
+            <div class="question-box">
+                <p>What are you<br> in the mood for?</p>
+            </div>
+            <div class="options">
+                <button class="option-button">Appetiser</button>
+                <button class="option-button">Main</button>
+                <button class="option-button">Dessert</button>
+				<button class="option-button">Surprise me!</button>
+            </div>
+			
+        </div>
+
+		<!--Step 6: Recommendation-->
+		<div id="step6" class="step hidden">
+			<p>Thanks for letting me know what you are looking for!</p>
+			<p>Here is what I would recommend to help you<br> get started on your learning journey!</p>
+			<p>Bon appétit!</p>
+			<div class="recommendation-box">
+				<ul id="recommendation-list"></ul>
+			</div>
+			<button id="restart-button" class="option-button">Start Over</button>
+		</div>		
+		
+		
+    </main>
+	<br>
+	<footer style="font-size: 10px; text-decoration: none;">
+				<p>&copy; 2024 National Library Board</p>
+	</footer>
+	<script src="script.js"></script>
+</body>
+</html>

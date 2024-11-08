@@ -1,0 +1,158 @@
+body {
+    font-family: 'Comfortaa', sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+	background-color: #FDF7E7; 
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.chef-image, .sushi-image {
+    width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.grey-button {
+    background-color: #ccc;
+	font-family: 'Comfortaa', sans-serif;
+	width: 200px;
+}
+
+.red-button {
+    background-color: #F26E56;
+	font-family: 'Comfortaa', sans-serif;
+    color: white;
+	width: 200px;
+}
+
+.progress-bar {
+    width: 50%;
+    height: 10px;
+    background-color: #ccc; //grey portion
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.progress_1 {
+    width: 25%;
+    height: 100%;
+    background-color: #F26E56;
+    border-radius: 10px;
+}
+
+.progress_2 {
+    width: 50%;
+    height: 100%;
+    background-color: #F26E56;
+    border-radius: 10px;
+}
+
+.progress_1 {
+    width: 25%;
+    height: 100%;
+    background-color: #F26E56;
+    border-radius: 10px;
+}
+
+.progress_2 {
+    width: 50%;
+    height: 100%;
+    background-color: #F26E56;
+    border-radius: 10px;
+}
+
+.progress_3 {
+    width: 75%;
+    height: 100%;
+    background-color: #F26E56;
+    border-radius: 10px;
+}
+
+.progress_4 {
+    width: 100%;
+    height: 100%;
+    background-color: #F26E56;
+    border-radius: 10px;
+}
+
+
+.question-box {
+    background-color: #F26E56;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.option-button {
+    background-color: #ccc;
+}
+
+.option-button.selected {
+    background-color: #F26E56;
+    color: white;
+}
+
+#step3 .options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#step3 .option-button {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#step4 .options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#step4 .option-button {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.recommendation-box {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#restart-button {
+    margin-top: 20px;
+}
